@@ -1,25 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React , {useState , useEffect} from "react";
+import Header from "./components/header/header";
+import Router from "./routes";
+import { auth } from "./firebase/firebase.utils";
 
 function App() {
+
+  const [userData , setUserData] = useState();
+
+  useEffect(() => {
+    auth.onAuthStateChanged(user => {
+      setUserData(user)
+    })
+    console.log(userData);
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header userData = {userData}/>
+      <Router />
+    </>
   );
 }
 
