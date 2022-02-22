@@ -2,13 +2,23 @@ import { Link } from "react-router-dom";
 import "./header.style.scss";
 import { auth } from "../../firebase/firebase.utils";
 import { useSelector } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo/083 crown.svg";
 import { useEffect } from "react";
 
+
 export default function Header() {
 
-  const userData = useSelector(state => state.user)
+  const navigate = useNavigate();
+  const userData = useSelector(state => state.user);
+
+  useEffect(() => {
+    if (userData.currentUser) {
+      navigate("/")
+    }
+  } , [navigate , userData])
+
+
 
 
   return (

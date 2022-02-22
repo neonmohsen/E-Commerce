@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Header from "./components/header/header";
 import Router from "./routes";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
-import { useDispatch } from "react-redux";
+import { useDispatch  } from "react-redux";
 import { userAdded } from "./services/redux/userReducer";
 
 function App() {
   const dispatch = useDispatch();
-  // const [userData, setUserData] = useState();
+
 
   useEffect(() => {
     auth.onAuthStateChanged(async userAuth => {
