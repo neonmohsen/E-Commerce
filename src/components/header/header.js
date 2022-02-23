@@ -3,20 +3,23 @@ import "./header.style.scss";
 import { auth } from "../../firebase/firebase.utils";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as Logo } from "../../assets/logo/083 crown.svg";
+import { ReactComponent as Logo } from "../../assets/svg/083 crown.svg";
 import { useEffect } from "react";
+import CartIcon from "../cart-icon/cartIcon";
+import CartDropDown from "../cart-dropdown/cartDropDown";
 
 
 export default function Header() {
 
   const navigate = useNavigate();
   const userData = useSelector(state => state.user);
+  const cartHidden = useSelector(state => state.cartHidden)
 
   useEffect(() => {
     if (userData.currentUser) {
       navigate("/")
     }
-  } , [navigate , userData])
+  }, [navigate, userData])
 
 
 
@@ -39,7 +42,12 @@ export default function Header() {
             :
             <div className="option" onClick={() => auth.signOut()}>SIGN OUT</div>
         }
+        <CartIcon />
       </div>
+      {
+        cartHidden.hidden ? null : <CartDropDown />
+      }
+
     </div>
   );
 }
