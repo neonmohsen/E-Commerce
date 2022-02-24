@@ -2,10 +2,14 @@ import "./signIn.style.scss";
 import FormInput from "../form-input/formInput";
 import CustomButton from "../custom-button/customBotton";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { signInWithGoogle, auth } from "../../firebase/firebase.utils"
 
 export default function SignIn() {
+
+  const navigate = useNavigate();
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -19,6 +23,7 @@ export default function SignIn() {
         email: "",
         password: "",
       });
+      navigate('/')
     } catch (error) {
       console.error(error);
     }
