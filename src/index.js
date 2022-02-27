@@ -5,14 +5,18 @@ import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import store from './store'
-import { Provider } from 'react-redux'
+import store from './store';
+import { Provider } from 'react-redux';
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from 'redux-persist';
 
-
+let persistor = persistStore(store);
 ReactDOM.render(
-  <Provider store = {store}>
+  <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <PersistGate persistor = {persistor }>
+        <App />
+      </PersistGate>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")
