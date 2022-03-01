@@ -5,12 +5,13 @@ import { useSelector } from "react-redux";
 import { ReactComponent as Logo } from "../../assets/svg/083 crown.svg";
 import CartIcon from "../cart-icon/cartIcon";
 import CartDropDown from "../cart-dropdown/cartDropDown";
+import { selectHiddenCart } from "../../services/redux/cartSelector";
 
 
 export default function Header() {
 
   const userData = useSelector(state => state.user);
-  const cartHidden = useSelector(state => state.cartHidden)
+  const cartHidden = useSelector(state => selectHiddenCart(state))
 
 
 
@@ -35,7 +36,7 @@ export default function Header() {
         <CartIcon />
       </div>
       {
-        cartHidden.hidden ? null : <CartDropDown />
+        cartHidden ? null : <CartDropDown />
       }
 
     </div>

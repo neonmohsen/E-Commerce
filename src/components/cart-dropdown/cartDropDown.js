@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import CartItem from "../cart-items/cartItem";
 import { useNavigate } from "react-router-dom";
 import { cartHidden } from "../../services/redux/cartReducer";
+import { selectCartItems } from "../../services/redux/cartSelector";
 
 
 
@@ -12,7 +13,7 @@ export default function CartDropDown() {
 
 
     const navigate = useNavigate();
-    const cartItem = useSelector(state => state.cartHidden.cartItem);
+    const cartItem = useSelector(state => selectCartItems(state));
     const dispatch = useDispatch();
     return (
         <>

@@ -2,12 +2,12 @@ import "./checkout.style.scss";
 
 import { useSelector } from "react-redux";
 import CheckoutItems from "../components/checkout-items/checkoutItems";
+import { selectCartItems, selectTotalPrice } from "../services/redux/cartSelector";
 
 export default function Checkout() {
 
-    const cartItem = useSelector(state => state.cartHidden.cartItem);
-    const itemPrice = cartItem.map(item => item.price * item.quantity)
-    const totalPrice = itemPrice.reduce((accumalatedQuantity, itemPrice) => accumalatedQuantity + itemPrice, 0);
+    const totalPrice = useSelector(state => selectTotalPrice(state));
+    const cartItem = useSelector(state => selectCartItems(state));
     return (
         <>
             <div className="checkout-page">
