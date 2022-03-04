@@ -3,6 +3,7 @@ import "./checkout.style.scss";
 import { useSelector } from "react-redux";
 import CheckoutItems from "../components/checkout-items/checkoutItems";
 import { selectCartItems, selectTotalPrice } from "../services/redux/cartSelector";
+import CheckoutStripe from "../components/stripe-checkout/stripeCheckout";
 
 export default function Checkout() {
 
@@ -32,6 +33,7 @@ export default function Checkout() {
                     cartItem.map(item => <CheckoutItems key = {item.id} cartItem = {item} />)
                 }
                 <div className="total">TOTAL : ${totalPrice}</div>
+                <CheckoutStripe price = {totalPrice} />
             </div>
         </>
     )
