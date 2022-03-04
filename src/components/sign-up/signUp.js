@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {useNavigate} from "react-router-dom";
 
 import FormInput from "../form-input/formInput";
 import CustomButton from "../custom-button/customBotton";
@@ -7,6 +8,7 @@ import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
 import './signUp.style.scss';
 
 export default function SignUp() {
+    const navigate = useNavigate();
 
     const [data, setData] = useState({
         displayName: '',
@@ -28,13 +30,13 @@ export default function SignUp() {
             const { user } = await auth.createUserWithEmailAndPassword(data.email, data.password);
 
             await createUserProfileDocument(user , {displayName : data.displayName});
-
             setData({
                 displayName: '',
                 email: '',
                 password: '',
                 confirmPassword: ''
             })
+            navigate('/')
 
         } catch (error) {
             console.error(error);
