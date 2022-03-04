@@ -25,9 +25,15 @@ const reducers = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
+const middleware = []
+
+if (process.env.NODE_ENV === 'development') {
+  middleware.push(logger)
+}
+
 export default configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false,
-  }).concat(logger),
+  }).concat(middleware),
 })
